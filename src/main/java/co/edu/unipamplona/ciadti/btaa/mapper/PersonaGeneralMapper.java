@@ -9,8 +9,9 @@
  */
 package co.edu.unipamplona.ciadti.btaa.mapper;
 
-import co.edu.unipamplona.ciadti.btaa.dto.PersonaGeneralDTO;
-import co.edu.unipamplona.ciadti.btaa.entity.PersonaGeneral;
+import co.edu.unipamplona.ciadti.btaa.model.dto.PersonaGeneralDTO;
+import co.edu.unipamplona.ciadti.btaa.model.entity.PersonaGeneral;
+
 import org.mapstruct.Mapper;
 
 import java.util.List;

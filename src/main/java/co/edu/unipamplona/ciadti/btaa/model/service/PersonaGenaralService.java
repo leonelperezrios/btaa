@@ -7,11 +7,11 @@
  * Modificaciones:
  * 25/03/2026 - Leonel Antonio Pérez Ríos - Creación inicial
  */
-package co.edu.unipamplona.ciadti.btaa.service;
-
-import co.edu.unipamplona.ciadti.btaa.dto.PersonaGeneralDTO;
+package co.edu.unipamplona.ciadti.btaa.model.service;
 
 import java.util.List;
+
+import co.edu.unipamplona.ciadti.btaa.model.dto.PersonaGeneralDTO;
 
 public interface PersonaGenaralService {
     List<PersonaGeneralDTO> findAll();

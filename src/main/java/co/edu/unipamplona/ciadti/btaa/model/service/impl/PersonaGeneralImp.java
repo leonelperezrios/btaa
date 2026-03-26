@@ -7,13 +7,14 @@
  * Modificaciones:
  * 25/03/2026 - Leonel Antonio Pérez Ríos - Creación inicial
  */
-package co.edu.unipamplona.ciadti.btaa.service.impl;
+package co.edu.unipamplona.ciadti.btaa.model.service.impl;
 
-import co.edu.unipamplona.ciadti.btaa.dto.PersonaGeneralDTO;
-import co.edu.unipamplona.ciadti.btaa.entity.PersonaGeneral;
 import co.edu.unipamplona.ciadti.btaa.mapper.PersonaGeneralMapper;
-import co.edu.unipamplona.ciadti.btaa.repository.PersonaGeneralRepository;
-import co.edu.unipamplona.ciadti.btaa.service.PersonaGenaralService;
+import co.edu.unipamplona.ciadti.btaa.model.dto.PersonaGeneralDTO;
+import co.edu.unipamplona.ciadti.btaa.model.entity.PersonaGeneral;
+import co.edu.unipamplona.ciadti.btaa.model.repository.PersonaGeneralRepository;
+import co.edu.unipamplona.ciadti.btaa.model.service.PersonaGenaralService;
+
 import org.springframework.stereotype.Service;
 
 import java.util.List;

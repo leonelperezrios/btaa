@@ -9,8 +9,9 @@
  */
 package co.edu.unipamplona.ciadti.btaa.controller;
 
-import co.edu.unipamplona.ciadti.btaa.dto.PersonaGeneralDTO;
-import co.edu.unipamplona.ciadti.btaa.service.PersonaGenaralService;
+import co.edu.unipamplona.ciadti.btaa.model.dto.PersonaGeneralDTO;
+import co.edu.unipamplona.ciadti.btaa.model.service.PersonaGenaralService;
+
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;

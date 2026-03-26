@@ -7,7 +7,7 @@
  * Modificaciones:
  * 25/03/2026 - Leonel Antonio Pérez Ríos - Creación inicial
  */
-package co.edu.unipamplona.ciadti.btaa.dto;
+package co.edu.unipamplona.ciadti.btaa.model.dto;
 
 public record PersonaGeneralDTO (
     Long id,
