@@ -66,6 +66,9 @@ public class PersonaGeneralEntity implements Serializable, Cloneable{
     @JoinColumn(name = "TIDG_ID", insertable = false, updatable = false)
     private TipoDocumentoGeneralEntity tipoDocumentoIdentidad;
 
+    @OneToOne(mappedBy = "personaGeneral", fetch = FetchType.LAZY)
+    private PersonaNaturalGeneralEntity personaNaturalGeneral;
+
     @Override
     public Object clone() throws CloneNotSupportedException {
         return super.clone();

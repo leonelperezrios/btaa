@@ -10,8 +10,8 @@ import co.edu.unipamplona.ciadti.btaa.mapper.GeneralDocumentTypeMapper;
 import co.edu.unipamplona.ciadti.btaa.model.service.TipoDocumentoGeneralService;
 import lombok.RequiredArgsConstructor;
 
-@RequiredArgsConstructor
 @Service
+@RequiredArgsConstructor
 public class TipoDocumentoGeneralImpl implements TipoDocumentoGeneralService{
 
     private final TipoDocumentoGeneralRepository tipoDocumentoGeneralRepository;
@@ -39,7 +39,7 @@ public class TipoDocumentoGeneralImpl implements TipoDocumentoGeneralService{
         throw new UnsupportedOperationException("Unimplemented method 'delete'");
     }
 
-    
 
-    
+
+
 }

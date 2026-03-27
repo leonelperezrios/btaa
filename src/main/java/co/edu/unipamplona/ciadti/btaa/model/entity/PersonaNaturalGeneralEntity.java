@@ -2,8 +2,18 @@ package co.edu.unipamplona.ciadti.btaa.model.entity;
 
 import java.io.Serializable;
 import java.util.Date;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToOne;
+import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -32,14 +42,6 @@ public class PersonaNaturalGeneralEntity implements Serializable, Cloneable{
     @Column(name = "PENG_SEXO", nullable = false)
     private String sexo;
 
-    // TODO: crear entidad ciudad general
-    //@Column(name = "CIGE_IDLUGARNACIMIENTO")
-    //private CiudadGeneralEntity ciudadNacimiento;
-
-    // TODO: crear entidad
-    //@Column(name = "ESCG_ID")
-    //private ;
-
     @Column(name = "PENG_LIBRETAMILITAR")
     private String libretaMilitar;
 
@@ -52,23 +54,11 @@ public class PersonaNaturalGeneralEntity implements Serializable, Cloneable{
     @Column(name = "PENG_NUMEROPASAPORTE")
     private String numeroPasaporte;
 
-    // TODO: crear entidad
-    //@Column(name = "REGE_ID")
-    //private ;
-
-    // TODO: crear entidad pais general
-    //@Column(name = "PAGE_IDNACIONALIDAD")
-    //private PaisGeneralEntitY paisNacionalidad;
-
     @Column(name = "PENG_OTRANACIONALIDAD")
     private String otraNacionalidad;
 
     @Column(name = "PENG_EMAILINSTITUCIONAL")
     private String emailInstitucional;
-
-    // TODO: crear entidad pais general
-    //@Column(name = "PAGE_IDNACIMIENTO")
-    //private PaisGeneralEntity paisNacimiento;
 
     @Column(name = "PENG_UBICACIONFISICAHOJAVIDA")
     private String ubicacionFisicaHojavida;
@@ -108,6 +98,6 @@ public class PersonaNaturalGeneralEntity implements Serializable, Cloneable{
     public String toString() {
         return "PersonaNaturalGeneralEntity [idPersonaGeneral=" + idPersonaGeneral + ", primerApellido=" + primerApellido + ", segundoApellido=" + segundoApellido + ", primerNombre=" + primerNombre + ", segundoNombre=" + segundoNombre + ", sexo=" + sexo + ", ubicacionFisicaHojavida=" + ubicacionFisicaHojavida + ", claseLibretaMilitar=" + claseLibretaMilitar + ", vive=" + vive + ", fax=" + fax + ", fechaVigenciaPasaporte=" + fechaVigenciaPasaporte + ", fechaNacimiento=" + fechaNacimiento + ", registradoPor=" + registradoPor + ", fechaCambio=" + fechaCambio + ", personaGeneral=" + personaGeneral + "]";
     }
+}
 
     
-}

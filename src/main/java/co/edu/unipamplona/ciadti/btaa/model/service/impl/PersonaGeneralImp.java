@@ -9,6 +9,7 @@
  */
 package co.edu.unipamplona.ciadti.btaa.model.service.impl;
 
+import co.edu.unipamplona.ciadti.btaa.model.dto.PersonaContactoUpdateDTO;
 import co.edu.unipamplona.ciadti.btaa.mapper.GeneralPersonMapper;
 import co.edu.unipamplona.ciadti.btaa.model.dto.PersonaGeneralDTO;
 import co.edu.unipamplona.ciadti.btaa.model.dto.RegistroUsuarioDTO;
@@ -17,14 +18,20 @@ import co.edu.unipamplona.ciadti.btaa.model.entity.PersonaGeneralEntity;
 import co.edu.unipamplona.ciadti.btaa.model.entity.PersonaNaturalGeneralEntity;
 import co.edu.unipamplona.ciadti.btaa.model.entity.UsuarioAspiranteEntity;
 import co.edu.unipamplona.ciadti.btaa.model.repository.AspiranteRepository;
+import co.edu.unipamplona.ciadti.btaa.model.dto.PersonaNombresUpdateDTO;
+import co.edu.unipamplona.ciadti.btaa.model.dto.PersonaUbicacionUpdateDTO;
+import co.edu.unipamplona.ciadti.btaa.model.entity.PersonaNaturalGeneralEntity;
 import co.edu.unipamplona.ciadti.btaa.model.repository.PersonaGeneralRepository;
 import co.edu.unipamplona.ciadti.btaa.model.repository.PersonaNaturalGeneralRepository;
 import co.edu.unipamplona.ciadti.btaa.model.repository.UsuarioAspiranteRepository;
 import co.edu.unipamplona.ciadti.btaa.model.service.PersonaGeneralService;
 import lombok.RequiredArgsConstructor;
+import co.edu.unipamplona.ciadti.btaa.model.repository.PersonaNaturalGeneralRepository;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
@@ -40,6 +47,8 @@ public class PersonaGeneralImp implements PersonaGeneralService {
     private final AspiranteRepository aspiranteRepository;
     private final PersonaNaturalGeneralRepository personaNaturalGeneralRepository;
     private final PasswordEncoder passwordEncoder;
+    private final PersonaGeneralRepository repository;
+    private final PersonaNaturalGeneralRepository personaNaturalRepository;
 
 
 
@@ -55,12 +64,87 @@ public class PersonaGeneralImp implements PersonaGeneralService {
     }
 
     @Override
+    @Transactional
     public PersonaGeneralDTO save(PersonaGeneralDTO dto) {
         PersonaGeneralEntity entity = mapper.toEntity(dto);
         return mapper.toDto(personaGeneralRepository.save(entity));
     }
 
     @Override
+    @Transactional
+    public PersonaGeneralDTO update(Long id, PersonaGeneralDTO dto) {
+        repository.findById(id).orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
+        PersonaGeneralEntity entity = mapper.toEntity(dto);
+        entity.setId(id);
+        return mapper.toDto(repository.save(entity));
+    }
+
+    @Override
+    @Transactional
+    public PersonaGeneralDTO updateContacto(Long id, PersonaContactoUpdateDTO dto) {
+        PersonaGeneralEntity personaGeneral = getPersonaGeneral(id);
+        PersonaNaturalGeneralEntity personaNatural = getPersonaNatural(personaGeneral);
+
+        if (dto.mail() != null) {
+            personaGeneral.setMail(dto.mail());
+        }
+        if (dto.telefonoCelular() != null) {
+            personaGeneral.setTelefonoCelular(dto.telefonoCelular());
+        }
+        if (dto.telefono() != null) {
+            personaGeneral.setTelefono(dto.telefono());
+        }
+        if (dto.emailInstitucional() != null) {
+            personaNatural.setEmailInstitucional(dto.emailInstitucional());
+        }
+
+        personaNaturalRepository.save(personaNatural);
+        return mapper.toDto(repository.save(personaGeneral));
+    }
+
+    @Override
+    @Transactional
+    public PersonaGeneralDTO updateNombres(Long id, PersonaNombresUpdateDTO dto) {
+        PersonaGeneralEntity personaGeneral = getPersonaGeneral(id);
+        PersonaNaturalGeneralEntity personaNatural = getPersonaNatural(personaGeneral);
+
+        if (dto.primerNombre() != null) {
+            personaNatural.setPrimerNombre(dto.primerNombre());
+        }
+        if (dto.segundoNombre() != null) {
+            personaNatural.setSegundoNombre(dto.segundoNombre());
+        }
+        if (dto.primerApellido() != null) {
+            personaNatural.setPrimerApellido(dto.primerApellido());
+        }
+        if (dto.segundoApellido() != null) {
+            personaNatural.setSegundoApellido(dto.segundoApellido());
+        }
+        if (dto.sexo() != null) {
+            personaNatural.setSexo(dto.sexo());
+        }
+
+        personaNaturalRepository.save(personaNatural);
+        return mapper.toDto(personaGeneral);
+    }
+
+    @Override
+    @Transactional
+    public PersonaGeneralDTO updateUbicacion(Long id, PersonaUbicacionUpdateDTO dto) {
+        PersonaGeneralEntity personaGeneral = getPersonaGeneral(id);
+
+        if (dto.direccion() != null) {
+            personaGeneral.setDireccion(dto.direccion());
+        }
+        if (dto.lugarExpedicion() != null) {
+            personaGeneral.setLugarExpedicion(dto.lugarExpedicion());
+        }
+
+        return mapper.toDto(repository.save(personaGeneral));
+    }
+
+    @Override
+    @Transactional
     public void delete(Long id) {
         personaGeneralRepository.deleteById(id);
     }
@@ -71,7 +155,7 @@ public class PersonaGeneralImp implements PersonaGeneralService {
         if (dto == null) {
             throw new IllegalArgumentException("El DTO no puede ser null");
         }
-        
+
         PersonaGeneralEntity personaGeneral = new PersonaGeneralEntity();
         personaGeneral.setTipoPersona(dto.tipoPersona());
         personaGeneral.setMail(dto.mail());
@@ -82,7 +166,7 @@ public class PersonaGeneralImp implements PersonaGeneralService {
 
         PersonaGeneralEntity personaGuardada = personaGeneralRepository.save(personaGeneral);
         Long pegeId = personaGuardada.getId();
-        
+
         UsuarioAspiranteEntity usuarioAspirante = new UsuarioAspiranteEntity();
         usuarioAspirante.setIdPersonaGeneral(pegeId);
         usuarioAspirante.setUsuario(dto.usuario());
@@ -119,6 +203,18 @@ public class PersonaGeneralImp implements PersonaGeneralService {
 
         return "Usuario registrado correctamente";
 
+    }
+
+    private PersonaGeneralEntity getPersonaGeneral(Long id) {
+        return repository.findById(id).orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
+    }
+
+    private PersonaNaturalGeneralEntity getPersonaNatural(PersonaGeneralEntity personaGeneral) {
+        PersonaNaturalGeneralEntity personaNatural = personaGeneral.getPersonaNaturalGeneral();
+        if (personaNatural == null) {
+            throw new RuntimeException("Informacion natural no encontrada para la persona");
+        }
+        return personaNatural;
     }
 }
 

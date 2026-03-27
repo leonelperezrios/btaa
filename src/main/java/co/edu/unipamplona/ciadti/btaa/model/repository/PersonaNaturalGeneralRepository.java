@@ -12,8 +12,9 @@ package co.edu.unipamplona.ciadti.btaa.model.repository;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import co.edu.unipamplona.ciadti.btaa.model.entity.PersonaNaturalGeneralEntity;
+import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface PersonaNaturalGeneralRepository extends JpaRepository<PersonaNaturalGeneralEntity, Long>{
-    
+
 }
 /* 26/03/2026 @:Sebastian Jaimes */

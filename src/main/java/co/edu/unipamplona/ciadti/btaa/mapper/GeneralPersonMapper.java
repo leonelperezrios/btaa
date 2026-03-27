@@ -10,18 +10,25 @@
 package co.edu.unipamplona.ciadti.btaa.mapper;
 
 import co.edu.unipamplona.ciadti.btaa.model.dto.PersonaGeneralDTO;
+import co.edu.unipamplona.ciadti.btaa.model.dto.PersonaNaturalGeneralDTO;
 import co.edu.unipamplona.ciadti.btaa.model.entity.PersonaGeneralEntity;
+import co.edu.unipamplona.ciadti.btaa.model.entity.PersonaNaturalGeneralEntity;
 
 import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
 
 import java.util.List;
 
 @Mapper(componentModel = "spring")
 public interface GeneralPersonMapper {
 
+    @Mapping(target = "tipoDocumentoIdentidadNombre", source = "tipoDocumentoIdentidad.descripcion")
+    @Mapping(target = "tipoDocumentoIdentidadAbreviatura", source = "tipoDocumentoIdentidad.abreviatura")
     PersonaGeneralDTO toDto(PersonaGeneralEntity entity);
 
     PersonaGeneralEntity toEntity(PersonaGeneralDTO dto);
+
+    PersonaNaturalGeneralDTO toPersonaNaturalDto(PersonaNaturalGeneralEntity entity);
 
     List<PersonaGeneralDTO> toDtoList(List<PersonaGeneralEntity> list);
 }
