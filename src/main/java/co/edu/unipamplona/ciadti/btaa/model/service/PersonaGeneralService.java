@@ -12,12 +12,15 @@ package co.edu.unipamplona.ciadti.btaa.model.service;
 import java.util.List;
 
 import co.edu.unipamplona.ciadti.btaa.model.dto.PersonaGeneralDTO;
+import co.edu.unipamplona.ciadti.btaa.model.dto.RegistroUsuarioDTO;
 
-public interface PersonaGenaralService {
+public interface PersonaGeneralService {
     List<PersonaGeneralDTO> findAll();
     PersonaGeneralDTO findById(Long id);
     PersonaGeneralDTO save(PersonaGeneralDTO dto);
     void delete(Long id);
+
+    String registerUser(RegistroUsuarioDTO dto);
 }
 
 /* 25/03/2026 @:Leonel Antonio Pérez Ríos */

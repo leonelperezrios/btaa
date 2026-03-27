@@ -13,6 +13,8 @@ import jakarta.persistence.Column;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 
+import java.util.Date;
+
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -28,14 +30,19 @@ public class TipoDocumentoGeneralEntity {
     private Long id;
 
     @Column(name = "TIDG_DESCRIPCION")
-    private String nombre;
+    private String descripcion;
 
     @Column(name = "TIDG_TIPOPERSONA")
     private String tipoPersona;
 
     @Column(name = "TIDG_ABREVIATURA")
     private String abreviatura;
-     
+
+    @Column(name = "TIDG_REGISTRADOPOR")
+    private String registradoPor;
+
+    @Column(name = "TIDG_FECHACAMBIO")
+    private Date fechaCambio;
 }
 
 

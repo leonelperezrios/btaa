@@ -11,12 +11,12 @@ package co.edu.unipamplona.ciadti.btaa.model.service;
 
 import java.util.List;
 
-import co.edu.unipamplona.ciadti.btaa.model.entity.TipoDocumentoGeneralEntity;
+import co.edu.unipamplona.ciadti.btaa.model.dto.TipoDocumentoGeneralDTO;
 
 
 public interface TipoDocumentoGeneralService {
-    List<TipoDocumentoGeneralEntity> findAll();
-    TipoDocumentoGeneralEntity findById(Long id);
-    TipoDocumentoGeneralEntity save(TipoDocumentoGeneralEntity dto);
+    List<TipoDocumentoGeneralDTO> findAll();
+    TipoDocumentoGeneralDTO findById(Long id);
+    TipoDocumentoGeneralDTO save(TipoDocumentoGeneralDTO dto);
     void delete(Long id);
 }

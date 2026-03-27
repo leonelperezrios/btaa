@@ -10,20 +10,20 @@
 package co.edu.unipamplona.ciadti.btaa.mapper;
 
 import co.edu.unipamplona.ciadti.btaa.model.dto.PersonaGeneralDTO;
-import co.edu.unipamplona.ciadti.btaa.model.entity.PersonaGeneral;
+import co.edu.unipamplona.ciadti.btaa.model.entity.PersonaGeneralEntity;
 
 import org.mapstruct.Mapper;
 
 import java.util.List;
 
 @Mapper(componentModel = "spring")
-public interface PersonaGeneralMapper {
+public interface GeneralPersonMapper {
 
-    PersonaGeneralDTO toDto(PersonaGeneral entity);
+    PersonaGeneralDTO toDto(PersonaGeneralEntity entity);
 
-    PersonaGeneral toEntity(PersonaGeneralDTO dto);
+    PersonaGeneralEntity toEntity(PersonaGeneralDTO dto);
 
-    List<PersonaGeneralDTO> toDtoList(List<PersonaGeneral> list);
+    List<PersonaGeneralDTO> toDtoList(List<PersonaGeneralEntity> list);
 }
 
 /* 25/03/2026 @:Leonel Antonio Pérez Ríos */

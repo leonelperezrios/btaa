@@ -11,9 +11,10 @@ package co.edu.unipamplona.ciadti.btaa.Auth;
 
 import org.springframework.web.bind.annotation.RestController;
 
-import co.edu.unipamplona.ciadti.btaa.model.dto.PersonaGeneralDTO;
-import co.edu.unipamplona.ciadti.btaa.model.entity.TipoDocumentoGeneralEntity;
+import co.edu.unipamplona.ciadti.btaa.model.dto.RegistroUsuarioDTO;
+import co.edu.unipamplona.ciadti.btaa.model.dto.TipoDocumentoGeneralDTO;
 import co.edu.unipamplona.ciadti.btaa.model.service.TipoDocumentoGeneralService;
+import co.edu.unipamplona.ciadti.btaa.model.service.PersonaGeneralService;
 
 import java.util.List;
 
@@ -32,6 +33,7 @@ import lombok.RequiredArgsConstructor;
 public class AuthenticationController {
 
     private final TipoDocumentoGeneralService tipoDocumentoGeneralService;
+    private final PersonaGeneralService personaGeneralService;
 
 
     @Operation(
@@ -40,14 +42,17 @@ public class AuthenticationController {
     )
     @GetMapping("/document-type")
     public ResponseEntity<?> getDocumentType() throws Exception{
-        List<TipoDocumentoGeneralEntity> generalDocumentType = tipoDocumentoGeneralService.findAll();
+        List<TipoDocumentoGeneralDTO> generalDocumentType = tipoDocumentoGeneralService.findAll();
         return new ResponseEntity<>(generalDocumentType, HttpStatus.OK);
     }
 
+    @Operation(
+        summary = "Registra un nuevo usuario",
+        description = "Registra un nuevo usuario"
+    )
     @PostMapping("/signup")
-    private PersonaGeneralDTO signup(@RequestBody PersonaGeneralDTO dto){
-
-        return null;
+    public ResponseEntity<?> signup(@RequestBody RegistroUsuarioDTO dto) {
+        return ResponseEntity.ok(personaGeneralService.registerUser(dto));
     }
     
     

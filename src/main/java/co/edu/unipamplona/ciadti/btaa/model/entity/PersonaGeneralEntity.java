@@ -12,7 +12,6 @@ package co.edu.unipamplona.ciadti.btaa.model.entity;
 import java.io.Serializable;
 import java.util.Date;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -22,7 +21,7 @@ import lombok.Setter;
 @Setter
 @Entity
 @Table(name = "PERSONAGENERAL", schema = "GENERAL")
-public class PersonaGeneral implements Serializable, Cloneable{
+public class PersonaGeneralEntity implements Serializable, Cloneable{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -30,7 +29,7 @@ public class PersonaGeneral implements Serializable, Cloneable{
     private Long id;
 
     @Column(name = "PEGE_TIPOPERSONA", nullable = false)
-    private String tipoPersona;
+    private Long tipoPersona;
 
     @Column(name = "PEGE_DIRECCION")
     private String direccion;
@@ -56,6 +55,12 @@ public class PersonaGeneral implements Serializable, Cloneable{
     @Column(name = "PEGE_FECHAEXPEDICION")
     private Date fechaExpedicion;
 
+    @Column(name = "PEGE_REGISTRADOPOR")
+    private String registradoPor;
+
+    @Column(name = "PEGE_FECHACAMBIO")
+    private Date fechaCambio;
+
     //@JsonBackReference
     @ManyToOne
     @JoinColumn(name = "TIDG_ID", insertable = false, updatable = false)
@@ -64,6 +69,11 @@ public class PersonaGeneral implements Serializable, Cloneable{
     @Override
     public Object clone() throws CloneNotSupportedException {
         return super.clone();
+    }
+
+    @Override
+    public String toString() {
+        return "PersonaGeneralEntity [id=" + id + ", tipoPersona=" + tipoPersona + ", direccion=" + direccion + ", mail=" + mail + ", telefonoCelular=" + telefonoCelular + ", telefono=" + telefono + ", idTipoDocumentoIdentidad=" + idTipoDocumentoIdentidad + ", documentoIdentidad=" + documentoIdentidad + ", lugarExpedicion=" + lugarExpedicion + ", fechaExpedicion=" + fechaExpedicion + ", tipoDocumentoIdentidad=" + tipoDocumentoIdentidad + ", registradoPor=" + registradoPor + ", fechaCambio=" + fechaCambio + "]";
     }
 
 }
